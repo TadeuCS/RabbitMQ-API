@@ -5,3 +5,7 @@ Projeto de estudo de RabbitMQ, criando uma API que recebe requisições REST via
 ```
 docker compose up -d
 ```
+
+[Painel do RabbitMQ](http://localhost:15672/)
+**User:** admin
+**Password** 123456
