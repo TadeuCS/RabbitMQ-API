@@ -1,0 +1,19 @@
+server:
+  port: 8085
+
+spring:
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "admin"
+    password: "123456"
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/nfse-db
+    username: postgres
+    password: admin
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
