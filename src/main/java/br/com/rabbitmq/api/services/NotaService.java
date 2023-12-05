@@ -22,11 +22,12 @@ public class NotaService {
     public void save(String message) {
         try {
             System.out.println(message);
-            ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
             NfseDto nfseDto = mapper.readValue(message, NfseDto.class);
             Nfse nfse = notaMapper.modelToEntity(nfseDto);
             notaRepository.save(nfse);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -10,38 +10,39 @@ public class RabbitMQConnection {
 
     private final AmqpAdmin amqpAdmin;
 
-    public RabbitMQConnection(AmqpAdmin amqpAdmin){
+    public RabbitMQConnection(AmqpAdmin amqpAdmin) {
         this.amqpAdmin = amqpAdmin;
     }
 
-    private Queue getQueue(String name){
+    private Queue getQueue(String name) {
         return new Queue(name, true, false, false);
     }
 
-    private DirectExchange getExchange(){
+    private DirectExchange getExchange() {
         return new DirectExchange(RabbitMQConstants.EXCHANGE_NAME);
     }
 
-    private Binding getBinding(Queue queue, Exchange exchange){
-        return new Binding(queue.getName(), Binding.DestinationType.QUEUE, exchange.getName(), queue.getName(), null);
+    private Binding getBinding(Queue queue, Exchange exchange) {
+        return new Binding(queue.getName(), Binding.DestinationType.QUEUE,
+                exchange.getName(), queue.getName(), null);
     }
 
     @PostConstruct
-    private void init(){
+    private void init() {
         Queue queueSend = this.getQueue(RabbitMQConstants.QUEUE_SEND);
-        Queue queueSave = this.getQueue(RabbitMQConstants.QUEUE_SAVE);
+        // Queue queueSave = this.getQueue(RabbitMQConstants.QUEUE_SAVE);
 
         DirectExchange exchange = this.getExchange();
 
         Binding bindingSend = this.getBinding(queueSend, exchange);
-        Binding bindingSave = this.getBinding(queueSave, exchange);
+        // Binding bindingSave = this.getBinding(queueSave, exchange);
 
         this.amqpAdmin.declareExchange(exchange);
 
         this.amqpAdmin.declareQueue(queueSend);
         this.amqpAdmin.declareBinding(bindingSend);
 
-        this.amqpAdmin.declareQueue(queueSave);
-        this.amqpAdmin.declareBinding(bindingSave);
+        // this.amqpAdmin.declareQueue(queueSave);
+        // this.amqpAdmin.declareBinding(bindingSave);
     }
 }
